@@ -1,0 +1,103 @@
+Your task is to create a very simple business management application.
+
+
+
+
+BusinessMan
+can be created by their name
+
+can add a new business to their portfolio
+
+can close one of their business
+
+can count the sum income of their businesses
+
+is represented in the following format:
+«name» has «number of businesses» business(es): «business 1 name», ..., «business n name»
+
+
+
+To keep it simple, our application should be able to handle only shops as businesses.
+
+
+
+
+Shop
+can be created by their name
+
+can store products by the name, quantity and price of the product
+
+the same product can have different prices in different shops
+
+can add new product to its store by giving the quantity and the price (per unit) of the product
+
+if the shop already had this product, giving its price is optional, if price is not given, we should use the previous price
+if the shop already has this product and we provide a new price on addition, beside adding the products to the store, we should update the price of the product as well to the given price. except if the given price is lower than the previous one, in this case we should keep the previous price (a price of a product can never be lower in a shop than it was previously)
+if the shop hasn't got this product yet, giving the price on addition is mandatory. If no price is given, then we shouldn't add the products to the store and print: «product name» can't be added to «shop name» without a price
+when we successfully added a product to a shop, we should print:  «product name» amount in «shop name»: «product quantity», price: «product price»$
+can sell products by giving the name and quantity of the product that we'd like to sell
+if the given product is not in the shop, then we should print: There's no «product name» in «shop name»
+if there's not enough product in the shop, we shouldn't sell any, but print: 
+«shop name» doesn't have enough «product name», only «product quantity» available
+if the shop has the product in the required quantity, we should decrement the quantity from the store and increment the income of the shop by the sum price of the products. We should also print:
+«shop name» sold «product name» («sold quantity») for «sum sold price»$
+
+
+GroceryShop
+can be created by their name
+
+should work the same way as a general shop
+
+when selling, the grocery shops has the opportunity to sell the products with or without a bag. if we choose to buy a bag as well and the selling is successful, we add an additional 1$ as the price of the bag to the income
+
+
+
+CoffeeShop
+can be created by their name and the price of its served coffee
+
+should work the same way as a general shop
+
+can serve coffee as well on the given price
+
+when a coffee is served, the price of the coffee is added to the income of the shop, and we print: 
+«shop name» served coffee for «coffee price»$
+
+
+
+Tests
+Write at least 2 unit tests to the add method of a shop.
+
+
+
+Sample code to run
+Using your solution, the following code should run without errors and print the expected results.
+
+
+
+tesco = GroceryShop('Tesco')
+starbucks = CoffeeShop('StarBucks', 3)
+johndoe = BusinessMan('John Doe')
+johndoe.add(tesco) # should print: John Doe has a new business: Tesco
+johndoe.add(starbucks) # should print: John Doe has a new business: StarBucks
+print(johndoe) # should print: John Doe has 2 businesses: Tesco, StarBucks
+tesco.add('milk', 100) # since there's no price for milk in Tesco yet, it should print: milk can't be added to Tesco without a price
+tesco.add('milk', 10, 2) # should print: milk amount in Tesco: 10, price: 2$
+tesco.add('milk', 5, 1) # the given price is less than the current, so the price doesn't change: milk amount in Tesco: 15, price: 2$
+tesco.add('potato', 1, 1) # should print: potato amount in Tesco: 1, price: 1$
+tesco.sell('beer') # should print: There's no beer in Tesco
+tesco.sell('butter') # should print: There's no butter in Tesco
+tesco.sell('potato', 5) # should print: Tesco doesn't have enough potato, only 1 available
+tesco.sell('potato') # should print: Tesco sold potato (1) for 1$
+tesco.sell('potato') # should print: There's no potato in Tesco
+tesco.sell('milk', 3) # should print: Tesco sold milk (3) for 6$
+tesco.sell('milk', 2, True) # selling with bag, should print: Tesco sold milk (2) for 5$
+tesco.add('milk', 5, 2.5) # the given price is more than the current, so it prints: milk amount in Tesco: 15, price: 2.5$
+tesco.sell('milk', 16) # should print: Tesco doesn't have enough carrot, only 15 available
+starbucks.add('milk', 10, 2) # should print: milk amount in StarBucks: 10, price: 2$
+starbucks.sell('milk') # should print: StarBucks sold milk (1) for 2$
+tesco.sell('milk') # should print: Tesco sold milk (1) for 2.5$
+starbucks.serve_coffee() # should print: StarBucks served coffee for 3$
+print(johndoe.sum_income()) # should print: 19.5
+johndoe.close('McDonalds') # should print: John Doe doesn't have business called McDonalds
+johndoe.close('StarBucks') # should print: John Doe closed StarBucks
+print(johndoe) # should print: John Doe has 1 business(es): Tesco
