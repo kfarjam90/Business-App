@@ -116,7 +116,7 @@ Cross-browser testing
 - Content refinement
 
 ## 5. Expected Deliverables
-###Primary Output:
+### Primary Output:
 - HTML file with embedded CSS and JavaScript
 - Screenshots of desktop and mobile views
 - Process documentation in this format
@@ -125,6 +125,3 @@ Cross-browser testing
 - Pure HTML/CSS/JS (no frameworks for simplicity)
 - Responsive design (mobile-first approach)
 
-Accessibility considerations (ARIA labels, contrast ratios)
-
-Performance optimized (minimal assets, efficient code)
