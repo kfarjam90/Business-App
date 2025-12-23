@@ -1,6 +1,6 @@
 # Arvin Creative Agency Landing Page - Project Plan
 
-![](image.png)![](image1.png)
+![](image.png)
 
 ## 1. Requirements Analysis
 Brand Positioning:
